@@ -1,0 +1,47 @@
+<div class="card-body">
+  <form novalidate  [formGroup]="productTagsForm">
+    <div formArrayName="tags">
+      <div class="form-group row mb-2"
+           *ngFor="let tag of tags.controls; let i=index">
+        <label class="col-md-2 col-form-label"
+               [attr.for]="i">Tag</label>
+
+        <div class="col-md-8">
+          <input class="form-control"
+                 [id]="i"
+                 type="text"
+                 placeholder="Tag"
+                 [formControlName]="i" />
+        </div>
+        <button class="col-md-1 btn btn-outline-warning btn-sm"
+                type="button"
+                title="Delete this search tag"
+                (click)="deleteTag(i)">Supprimer un tag
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 mb-2">
+        <button class="btn btn-outline-secondary btn-sm"
+                type="button"
+                title="Add a search tag"
+                (click)="addTag()">Ajouter un tag
+        </button>
+      </div>
+    </div>
+
+    <div class="form-group row mb-2">
+      <div class="offset-md-2 col-md-4">
+        <button class="btn btn-primary mr-3"
+                style="width:80px; margin-right: 10px"
+                type="submit"
+                [title]="productTagsForm.valid ? 'Enregistrer les données saisies' : 'Disabled until the form data is valid'"
+                [disabled]="!productTagsForm.valid"   (click)="saveTags()">
+          Save
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+

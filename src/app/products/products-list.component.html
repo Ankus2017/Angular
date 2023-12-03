@@ -1,0 +1,83 @@
+
+<div  class="row ">
+  <!--
+  <div class="col-sm-12">
+    <div id="chart">
+      <svg style="height: 1000px !important; length: 500px !important;">
+
+      </svg>
+    </div>
+    <div id="chart2">
+      <svg style="height: 1000px !important; length: 500px !important;">
+
+      </svg>
+    </div>
+  </div>-->
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+
+  </div>
+
+
+  <div class="card-body">
+
+
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <select class="form-control" (change)="onSelected($any($event.target).value)">
+          <option value="0" selected> Choisir la catégorie</option>
+          <option *ngFor="let category of categories$ | async" [value]="category.id"> {{ category.categoryName}}</option>
+        </select>
+      </div>
+      <div  class="col-lg-4 col-md-6 col-sm-12">
+        <input type="text" [(ngModel)]="listFilter" placeholder=" Filtrer par :">
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table" *ngIf="filteredProducts$ | async as products">
+        <thead>
+          <tr>
+            <th>
+              <button class="btn btn-primary" (click)="toggleImage()">
+              {{showImage ? 'Cacher' : 'Montrer'}}   les images
+              </button>
+            </th>
+            <th>Produit</th>
+            <th>Code</th>
+            <th>Categorie</th>
+            <th>Disponibilité</th>
+            <th>Prix</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>
+              <img *ngIf='showImage' [src]="product.imageUrl" [title]="product.productName" [style.width.px]="imageWidth" [style.margin.px]="imageMargin">
+            </td>
+            <td>
+              <a [routerLink]="['/products', product.id]" [queryParams]="{filterBy: listFilter, showImage: showImage}" > {{ product.productName}}</a>
+            </td>
+            <td>{{ product.productCode | convertToSpaces: '-'}}</td>
+            <td> {{product.categoryName }}</td>
+            <td>{{ product.releaseDate | date }}</td>
+            <td>{{ product.price | currency: 'EUR' : 'symbol' : '1.2-2' }}</td>
+            <td>
+              <ms-star [rating]="product.starRating" (ratingClicked)="onRatingClicked($event)"></ms-star>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-md-4" *ngIf="errorMessageAction$ | async as errorMessage">
+        {{ errorMessage}}
+      </div>
+    </div>
+  </div>
+</div>
+

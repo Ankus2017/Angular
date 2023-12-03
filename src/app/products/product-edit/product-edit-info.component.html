@@ -1,0 +1,133 @@
+<div class="card-body">
+<form novalidate  [formGroup]="productInfoForm">
+     <!-- (ngSubmit)="saveProduct()" -->
+
+
+  <div class="form-group row mb-2">
+    <label class="col-md-2 col-form-label"
+           for="productNameId">Nom</label>
+    <div class="col-md-8">
+      <input class="form-control"
+             id="productNameId"
+             type="text"
+             placeholder="Name (required)"
+             formControlName="productName"
+             [ngClass]="{'is-invalid': displayMessage.productName }" />
+      <span class="invalid-feedback">
+            {{displayMessage.productName}}
+          </span>
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <label class="col-md-2 col-form-label"
+           for="productCodeId">Code</label>
+    <div class="col-md-8">
+      <input class="form-control"
+             id="productCodeId"
+             type="text"
+             placeholder="Code (required)"
+             formControlName="productCode"
+             [ngClass]="{'is-invalid': displayMessage.productCode}" />
+      <span class="invalid-feedback">
+            {{displayMessage.productCode}}
+          </span>
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <label class="col-md-2 col-form-label"
+           for="starRatingId">Note (1-5)</label>
+
+    <div class="col-md-8">
+      <input class="form-control"
+             id="starRatingId"
+             type="text"
+             placeholder="Rating (1-5)"
+             formControlName="starRating"
+             [ngClass]="{'is-invalid': displayMessage.starRating}" />
+      <span class="invalid-feedback">
+            {{displayMessage.starRating}}
+          </span>
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <label class="col-md-2 col-form-label"
+           for="priceId">Price </label>
+
+    <div class="col-md-8">
+      <input class="form-control"
+             id="priceId"
+             type="text"
+             placeholder="Prix"
+             formControlName="price"
+             [ngClass]="{'is-invalid': displayMessage.price}" />
+      <span class="invalid-feedback">
+            {{displayMessage.price}}
+          </span>
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <label class="col-md-2 col-form-label"
+           for="descriptionId">Description</label>
+
+    <div class="col-md-8">
+          <textarea class="form-control"
+                    id="descriptionId"
+                    placeholder="Description"
+                    rows=3
+                    formControlName="description"
+                    [ngClass]="{'is-invalid': displayMessage.description}"></textarea>
+      <span class="invalid-feedback">
+            {{ displayMessage.description}}
+          </span>
+    </div>
+  </div>
+  <div class="form-group row mb-2">
+    <label class="col-md-2 col-form-label"
+           for="categoryId">Category</label>
+
+    <div class="col-md-8">
+      <select class="form-control"    placeholder="Description"   id="categoryId"  formControlName="categoryId"  [ngClass]="{'is-invalid': displayMessage.categoryId}">
+          <option value="0"   [attr.selected]="true">Choisir une catégorie</option>
+          <option *ngFor="let category of categories$ | async" [value]="category.id"> {{ category.categoryName}}</option>
+      </select>
+      <span class="invalid-feedback">
+            {{ displayMessage.categoryId}}
+          </span>
+    </div>
+  </div>
+  <div class="form-group row mb-2">
+    <label class="col-md-2 col-form-label"
+           for="releaseDateId">Release date</label>
+
+    <div class="col-md-8">
+      <input type="text"
+             id="releaseDateId"
+             class="form-control"
+             placeholder="Date"
+             formControlName="releaseDate"
+             [ngClass]="{'is-invalid': displayMessage.releaseDate}"
+             bsDatepicker  [bsValue]="releaseDate" [bsConfig]="{  dateInputFormat: 'DD/MM/YYYY'  }">
+      <span class="invalid-feedback">
+            {{ displayMessage.releaseDate}}
+          </span>
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <div class="offset-md-2 col-md-4">
+      <button class="btn btn-primary mr-3"
+              style="width:80px; margin-right: 10px"
+              type="submit"
+              [title]="productInfoForm.valid ? 'Enregistrer les données saisies' : 'Disabled until the form data is valid'"
+              [disabled]="!productInfoForm.valid"   (click)="saveProduct()">
+        Save
+      </button>
+
+    </div>
+  </div>
+</form>
+</div>
