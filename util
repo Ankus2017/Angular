@@ -1,1 +1,36 @@
+Instalowanie:
+1. Instalacja nodejs
+https://nodejs.org/en/download/
+All Things Paper → ATP
 
+–
+
+d:\projects\angular12
+npm install @angular/cli@13
+npm install @angular/cli@13.2.5
+npm install -g @angular/cli
+ng new all-things-paper –-prefix atp
+ng new the-paper-corner --prefix tpc
+
+---
+
+npm start → to start application
+code . → to open a project in the visual studio code
+
+---
+
+ng g c products/product-detail –flat
+--flat → no folder
+
+–
+NVM -WINDOWS
+
+https://github.com/coreybutler/nvm-windows
+
+nvm current: Display active version.
+nvm list [available]: List the node.js installations. Type available at the
+end to show a list of versions available for download.
+nvm version: Displays the current running version of NVM for
+Windows.
+Node - - version
+npm - - version
